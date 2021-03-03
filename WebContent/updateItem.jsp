@@ -44,7 +44,7 @@ try{
 			Item Name:<input type="text" name="itemName" value=<%=rs.getString("itemName")%>><br>
 			Item Price:<input type="text" name="itemPrice" value=<%=rs.getString("itemPrice")%>><br>
 			Item Description:<input type="text" name="itemDesc" value=<%=rs.getString("itemDesc")%>><br>
-			<input type="submit" name="btnSubmit" value="Submit">
+			<input type="submit" name="btnSubmit" value="Update Data">
 			
 		</form>
 		<%

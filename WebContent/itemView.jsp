@@ -56,12 +56,12 @@
 				<td><%=resultSet.getString("itemName") %></td>
 				<td><%=resultSet.getString("itemPrice") %></td>
 				<td><%=resultSet.getString("itemDesc") %></td>
-				<td><form action = "" method="POST" >
+				<td><form action = "removeItem" method="POST" >
 				<input type ='submit' value="Remove" name = "btnDelete"	>
 				<input type="hidden" name="itemID" value="<%=resultSet.getString("itemID") %>">
-				</form></td>
-				<td><form action = "updateItem.jsp" method="POST" >
-				<input type ='submit' value="Update" name = "btnUpdate"	>
+				</form>
+				<form action = "updateItem.jsp" method="POST" >
+				<input type ="submit" value="Update" name = "btnUpdate"	>
 				<input type="hidden" name="itemID" value="<%=resultSet.getString("itemID") %>">
 				</form></td>
 				
