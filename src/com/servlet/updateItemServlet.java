@@ -1,6 +1,8 @@
 package com.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +37,7 @@ public class updateItemServlet extends HttpServlet {
 		String itemCode = request.getParameter("itemCode");
 		String itemName = request.getParameter("itemName");
 		float itemPrice  = Float.parseFloat(request.getParameter("itemPrice"));
-		String itemDescription = request.getParameter("itemDescription");
+		String itemDescription = request.getParameter("itemDesc");
 		
 		item it = new item();
 		it.setItemID(productID);
@@ -47,6 +49,9 @@ public class updateItemServlet extends HttpServlet {
 		UpdateItemService uis = new UpdateItemService();
 		uis.updateItem(it);
 		uis.getMessage();
+		
+		RequestDispatcher dis = request.getRequestDispatcher("itemView.jsp");
+		dis.forward(request,response);
 	}
 
 }
