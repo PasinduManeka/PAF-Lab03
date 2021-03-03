@@ -31,7 +31,7 @@ public class updateItemServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		int productID = Integer.parseInt(request.getParameter("itemID"));
+		int productID = Integer.parseInt(request.getParameter("pid"));
 		String itemCode = request.getParameter("itemCode");
 		String itemName = request.getParameter("itemName");
 		float itemPrice  = Float.parseFloat(request.getParameter("itemPrice"));

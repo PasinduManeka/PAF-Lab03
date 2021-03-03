@@ -46,7 +46,7 @@
   
   <servlet>
   	<servlet-name>updateItem</servlet-name>
-  	<servlet-class>com.servlet.UpdateItemServlet</servlet-class>
+  	<servlet-class>com.servlet.updateItemServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>updateItem</servlet-name>

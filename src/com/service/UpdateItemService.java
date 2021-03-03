@@ -19,24 +19,23 @@ public class UpdateItemService {
 			con=DatabaseConnection.getConnection();
 			stmt=con.createStatement();
 			
-			ps=con.prepareStatement("update items "
-					+ "set itemCode =?, itemName=?, itemPrice=?, itemDesc=?"
-					+ "where itemID=?");
+			ps=con.prepareStatement("update items set itemCode =?, itemName=?, itemPrice=?, itemDesc=? where itemID=?");
 			
 			ps.setString(1, i.getItemCode());
 			ps.setString(2, i.getItemCode());
 			ps.setFloat(3, i.getPrice());
 			ps.setString(4, i.getDescription());
 			ps.setInt(5, i.getItemID());
-			boolean st=ps.execute();
+			ps.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
 			
-			if(st==true) {
-				message = "<script>alert('Stock Update success.')</script>";
-			}else {
-				message = "<script>alert('Stock Update success.')</script>";
-			}
+			
+			message = "<script>alert('Stock Update success.')</script>";
+			
 			
 		}catch(SQLException e) {
+			message="<Script>alert('Stock Update unsuccess.')</scrip>";
 			System.out.println(e);
 		}finally {
 			if(con != null) {

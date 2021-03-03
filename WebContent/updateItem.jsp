@@ -4,53 +4,57 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Update Item</title>
 </head>
 <body>
-	<%@page import="java.sql.*"  %>
-	<%@page import="java.io.*"  %>
-	<%@page import="java.sql.DriverManager" %>
-	<%@page import="java.sql.ResultSet"  %>
-	<%@page import="java.sql.Statement"  %>
-	<%@page import="java.sql.Connection"  %>
+<%@page import="java.sql.*" %>
+<%@page import="java.io.*" %>
+<%@page import="java.sql.DriverManager" %>
+<%@page import="java.sql.ResultSet" %>
+<%@page import="java.sql.Statement" %>
+<%@page import="java.sql.Connection" %>
+
+<%
+int id = Integer.parseInt(request.getParameter("itemID"));
+String url="jdbc:mysql://localhost:3306/paf";
+String user="root";
+String pass="";
+Connection con;
+
+try{
+	Class.forName("com.mysql.jdbc.Driver");
+}catch(Exception e){
+	System.out.println("Database doesn't connect."+e);
+}
+
+Statement stmt;
+ResultSet rs;
+
+try{
+	con=DriverManager.getConnection(url,user,pass);
+	stmt = con.createStatement();
 	
-	<%
-	int id = Integer.parseInt(request.getParameter("itemID")); 
-	String url="jdbc:mysql://localhost:3306/paf";
-	String user="root";
-	String password="";
-	Connection con;
-	
-	try{
-		Class.forName("com.mysql.jdbc.Driver");
-	}catch(Exception e){
-		System.out.println("Data base connection failed"+e);
-	}
-	Statement statement;
-	ResultSet resultSet;
-	try{
-		con=DriverManager.getConnection(url,user,password);
-		statement=con.createStatement();
-		
-		String sql="select itemCode,itemName,itemPrice,itemDesc from items where itemID='"+id+"'";
-		
-		resultSet=statement.executeQuery(sql);
-		while(resultSet.next()){
-	%>
-	<form action = "uiItem" method="post">
-		<input name="itemID" type="hidden" value=<%=resultSet.getString("itemID")%>><br>
-		Item Code:<input name="itemCode" type="text" value=<%=resultSet.getString("itemCode")%>><br>
-		Item Name:<input name="itemNamw" type="text" value=<%=resultSet.getString("itemName")%>><br>
-		Item Price:<input name="itemPrice" type="text" value=<%=resultSet.getString("itemPrice") %>><br>
-		Item Code:<input name="itemDescription" type="text" value=<%=resultSet.getString("itemDesc") %>><br>
-		<input type="submit" name="btnSubmit" value="Submit">
+	String sql="select* from items where itemID='"+id+"'";
+	rs=stmt.executeQuery(sql);
+	while(rs.next()){
+		%>
+		<form action="upItem" method="post">
+			<input type="hidden" name="pid" value=<%=rs.getString("itemID")%>><br>
+			Item Code:<input type="text" name="itemCode" value=<%=rs.getString("itemCode")%>><br>
+			Item Name:<input type="text" name="itemName" value=<%=rs.getString("itemName")%>><br>
+			Item Price:<input type="text" name="itemPrice" value=<%=rs.getString("itemPrice")%>><br>
+			Item Description:<input type="text" name="itemDesc" value=<%=rs.getString("itemDesc")%>><br>
+			<input type="submit" name="btnSubmit" value="Submit">
+			
+		</form>
 		<%
-		}
-	}catch(Exception e){
-		e.printStackTrace();
 	}
-	%>
-	</form>
-	
+}catch(Exception e){
+	e.printStackTrace();
+}
+
+
+%>
+
 </body>
 </html>
